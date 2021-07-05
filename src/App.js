@@ -10,9 +10,9 @@ Amplify.configure(awsExports);
 async function addContact() {
   const data = {
     body: {
-      Name: formState.Name,
-      
-      Email: formState.Email,
+      FirstName: formState.FirstName,
+      LastName: formState.LastName,
+      MailId: formState.MailId,
       FeedbackMessage: formState.FeedbackMessage
     }
   };
@@ -23,18 +23,13 @@ async function addContact() {
   alert('Mail sent');
 }
 
-const formState = { Name: '', Email: '',  FeedbackMessage: '' };
+const formState = { FirstName: '', LastName: '', MailId: '', FeedbackMessage: '' };
 
 function updateFormState(key, value) {
   formState[key] = value;
 }
 
 function App() {
-  const {search} = useLocation()
-    console.log(search);
-    const {name,email} = queryString.parse(search)
-    
-    console.log('name is',typeof name);
   return (
     <Container>
     <div>
@@ -42,13 +37,16 @@ function App() {
       <br/>
         <Form>
           <Form.Group>
-            <Form.Label>Name</Form.Label>
-            <Form.Control placeholder="Name" value={name} onChange={updateFormState('Name', name)} />
+            <Form.Label>FirstName</Form.Label>
+            <Form.Control placeholder="FirstName" onChange={e => updateFormState('FirstName', e.target.value)} />
           </Form.Group>
-          
           <Form.Group>
-            <Form.Label>Email</Form.Label>
-            <Form.Control placeholder="MailId" value={email} onChange={updateFormState('Email', email)} />
+            <Form.Label>LastName</Form.Label>
+            <Form.Control placeholder="LastName" onChange={e => updateFormState('LastName', e.target.value)} />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>MailId</Form.Label>
+            <Form.Control placeholder="MailId" onChange={e => updateFormState('MailId', e.target.value)} />
           </Form.Group>
           <Form.Group>
             <Form.Label>FeedbackMessage</Form.Label>
